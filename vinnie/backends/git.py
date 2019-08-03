@@ -1,6 +1,7 @@
 import warnings
 
 from git import Repo
+from git.exc import GitCommandError
 
 from .base import BaseBackend
 
@@ -14,7 +15,10 @@ class VinnieGit(BaseBackend):
 
     def get_current_version(self):
         """ Get the current version """
-        return self.repo.git.describe(tags=True)
+        try:
+            return self.repo.git.describe(tags=True)
+        except GitCommandError:
+            return self.get_initial_version()
 
     def tag_version(self, value, remote="origin"):
         self.repo.create_tag(value, message=f"Version '{value}' set by vinnie")

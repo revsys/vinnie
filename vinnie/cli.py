@@ -28,6 +28,14 @@ def cli(ctx, **kwargs):
 
 @cli.command()
 @click.pass_obj
+def bump(v):
+    """ Bump incrementing integer version """
+    new_value = v.next_bump()
+    click.echo(new_value)
+
+
+@cli.command()
+@click.pass_obj
 def patch(v):
     """ Patch version number, tag and push"""
     new_value = v.next_patch()

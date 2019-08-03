@@ -61,6 +61,11 @@ class Vinnie:
         else:
             return self.backend.get_current_version()
 
+    def get_next_bump(self):
+        current = self.strip_prefix(self.version())
+        next_integer = str(int(current) + 1)
+        return self.add_prefix(next_integer)
+
     def get_next_patch(self):
         current = self.strip_prefix(self.version())
         return self.add_prefix(semver.bump_patch(current))
@@ -72,6 +77,11 @@ class Vinnie:
     def get_next_major(self):
         current = self.strip_prefix(self.version())
         return self.add_prefix(semver.bump_major(current))
+
+    def next_bump(self):
+        next_value = self.get_next_bump()
+        self.backend.tag_version(next_value, remote=self.config.remote)
+        return next_value
 
     def next_patch(self):
         next_value = self.get_next_patch()

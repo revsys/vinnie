@@ -30,3 +30,24 @@ def repo():
 
     # Clean up the repo
     shutil.rmtree(repo_path)
+
+
+@pytest.fixture
+def empty_repo():
+    """ Create a repo without any tags """
+    current_dir = os.path.dirname(__file__)
+    repo_path = os.path.join(current_dir, "empty-repo")
+    file1_name = os.path.join(repo_path, "README.md")
+
+    r = Repo.init(repo_path)
+
+    open(file1_name, "wb").close()
+
+    r.index.add(["README.md"])
+    r.index.commit("First version")
+
+    yield repo_path
+
+    # Clean up the repo
+    shutil.rmtree(repo_path)
+

@@ -29,6 +29,22 @@ def test_strip_prefix(repo):
 
 def test_current_version(repo):
     # When given a version, use that instead of whatever is found in the repo
-    v = Vinnie(repo=repo_path("repo"), current_version="2.1.1")
+    v = Vinnie(repo=repo, current_version="2.1.1")
     assert v.version() == "2.1.1"
     assert v.get_next_patch() == "2.1.2"
+
+
+def test_repo_without_tags(empty_repo):
+    """ This tests situations where there are no initial tags """
+    v = Vinnie(repo=empty_repo)
+    v.dump()
+    assert v.version() == "0.0.0"
+    assert v.get_next_patch() == "0.0.1"
+
+
+def test_repo_without_tags_no_semver(empty_repo):
+    """ This tests situations where there are no initial tags """
+    v = Vinnie(repo=empty_repo, semver=False)
+    v.dump()
+    assert v.version() == "0"
+    assert v.get_next_bump() == "1"

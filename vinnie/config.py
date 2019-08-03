@@ -35,6 +35,9 @@ class VinnieConfig:
             if key not in ALLOWED_OPTIONS:
                 raise VinnieConfigError(f"Unknown option: {key}")
 
+        if self.semver is None:
+            self.semver = True
+
     def validate(self):
         """ Validate that the provided options make sense """
 
