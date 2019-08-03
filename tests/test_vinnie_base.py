@@ -9,21 +9,21 @@ def repo_path(relative):
     return os.path.join(current, relative)
 
 
-def test_version():
-    v = Vinnie(repo=repo_path("repo"))
+def test_version(repo):
+    v = Vinnie(repo=repo)
     assert v.version() == "v0.0.2"
 
 
-def test_add_prefix():
-    v = Vinnie(repo=repo_path("repo"), prefix="foo")
+def test_add_prefix(repo):
+    v = Vinnie(repo=repo, prefix="foo")
     assert v.add_prefix("3.0.0") == "foo3.0.0"
 
-    v = Vinnie(repo=repo_path("repo"))
+    v = Vinnie(repo=repo)
     assert v.add_prefix("3.0.0") == "3.0.0"
 
 
-def test_strip_prefix():
-    v = Vinnie(repo=repo_path("repo"), prefix="v")
+def test_strip_prefix(repo):
+    v = Vinnie(repo=repo, prefix="v")
     assert v.strip_prefix("v1.0.0") == "1.0.0"
 
 

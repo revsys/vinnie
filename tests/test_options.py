@@ -22,11 +22,10 @@ def repo_path(relative):
     return os.path.join(current, relative)
 
 
-def test_validate_repo_path():
+def test_validate_repo_path(repo):
     dne = repo_path("paths/does-not-exist")
     not_dir = repo_path("paths/not-a-dir")
     a_dir = repo_path("paths/a-dir")
-    good_repo = repo_path("repo")
 
     # Directory has to exist
     with pytest.raises(VinnieConfigError):
@@ -40,4 +39,4 @@ def test_validate_repo_path():
     with pytest.raises(VinnieConfigError):
         Vinnie(repo=a_dir)
 
-    Vinnie(repo=good_repo)
+    Vinnie(repo=repo)
