@@ -27,7 +27,7 @@ def test_strip_prefix(repo):
     assert v.strip_prefix("v1.0.0") == "1.0.0"
 
 
-def test_current_version():
+def test_current_version(repo):
     # When given a version, use that instead of whatever is found in the repo
     v = Vinnie(repo=repo_path("repo"), current_version="2.1.1")
     assert v.version() == "2.1.1"

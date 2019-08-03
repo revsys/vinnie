@@ -9,25 +9,23 @@ from git import Repo
 def repo():
     current_dir = os.path.dirname(__file__)
     repo_path = os.path.join(current_dir, "repo")
-    file_path = os.path.join(current_dir, "files")
+    file1_name = os.path.join(repo_path, "README.md")
+    file2_name = os.path.join(repo_path, "another_file.txt")
 
-    r = Repo.init(repo_path, bare=True)
-    r.create_head("master")
+    r = Repo.init(repo_path)
 
-    shutil.copy(
-        os.path.join(file_path, "README.md"), os.path.join(repo_path, "README.md")
-    )
+    open(file1_name, "wb").close()
+
     r.index.add(["README.md"])
-    r.create_tag("v0.0.1")
     r.index.commit("First version")
 
-    shutil.copy(
-        os.path.join(file_path, "another_file.txt"),
-        os.path.join(repo_path, "another_file.txt"),
-    )
+    r.create_tag("v0.0.1")
+
+    open(file2_name, "wb").close()
+
     r.index.add(["another_file.txt"])
-    r.create_tag("v0.0.2")
     r.index.commit("Second version")
+    r.create_tag("v0.0.2")
     yield repo_path
 
     # Clean up the repo
