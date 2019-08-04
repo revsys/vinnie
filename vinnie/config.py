@@ -56,7 +56,7 @@ class VinnieConfig:
     def validate_repo(self):
         """ Ensure we given a repo path or URL """
         # We can only have a repo path or a repo URL, but not both
-        if self.repo_url and self.repo != ".":
+        if self.repo_url is not None and self.repo is not None:
             raise VinnieConfigError(
                 "Cannot set repo url and repo path at the same time"
             )
@@ -102,8 +102,12 @@ class VinnieConfig:
         try:
             parts = urlparse(self.repo_url)
 
-            if parts.scheme != "http" or parts.scheme != "https":
+            if not (parts.scheme == "http" or parts.scheme == "https"):
                 raise ValueError
+
+            if not parts.netloc:
+                raise ValueError
+
         except ValueError:
             raise VinnieConfigError(f"'{self.repo_url}' is not a valid URL")
 
