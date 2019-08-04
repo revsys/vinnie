@@ -18,6 +18,7 @@ ALLOWED_OPTIONS = [
     "s3_url",
     "current_version",
     "remote",
+    "marker",
 ]
 
 

@@ -1,4 +1,5 @@
 import click
+import os
 
 from .base import Vinnie
 
@@ -16,6 +17,7 @@ from .base import Vinnie
 @click.option("--s3-url", envvar="VINNIE_S3_URL", default=None)
 @click.option("--current-version", envvar="VINNIE_CURRENT_VERSION", default=None)
 @click.option("--remote", envvar="VINNIE_GIT_REMOTE", default=None)
+@click.option("--marker", envvar="VINNIER_VERSION_MARKER", default="__VINNIE_VERSION__")
 @click.pass_context
 def cli(ctx, **kwargs):
     """ Vinnie the Versioner """
@@ -93,6 +95,30 @@ def validate(v):
     tags have moved since the last run. Store new tags
     """
     raise NotImplementedError("This feature is not implemented yet.")
+
+
+@cli.command()
+@click.argument(
+    "filename",
+    type=click.Path(exists=True, dir_okay=False, writable=True, resolve_path=True),
+)
+@click.pass_obj
+def replace(v, filename):
+    """ Replace placeholder with current version """
+    version = v.version()
+
+    temp_filename = f"{filename}.tmp"
+    f = open(temp_filename, "w+")
+    r = open(filename)
+
+    for line in r:
+        if v.config.marker in line:
+            line = line.replace(v.config.marker, version)
+        f.write(line)
+
+    r.close()
+    f.close()
+    os.rename(temp_filename, filename)
 
 
 @cli.command()
