@@ -40,3 +40,18 @@ def test_validate_repo_path(repo):
         Vinnie(repo=a_dir)
 
     Vinnie(repo=repo)
+
+
+def test_url_and_path(repo):
+    with pytest.raises(VinnieConfigError):
+        Vinnie(repo=repo, repo_url="https://github/")
+
+
+def test_invalid_url():
+    with pytest.raises(VinnieConfigError):
+        v = Vinnie(repo_url="g[]", repo=None)
+        v.config.validate_repo_url()
+
+    with pytest.raises(VinnieConfigError):
+        v = Vinnie(repo_url="github.com", repo=None)
+        v.config.validate_repo_url()

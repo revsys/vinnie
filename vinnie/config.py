@@ -1,6 +1,7 @@
 import warnings
 
 from pathlib import Path
+from urllib.parse import urlparse
 
 from .exceptions import VinnieConfigError
 
@@ -98,8 +99,13 @@ class VinnieConfig:
 
     def validate_repo_url(self):
         """ Ensure repo URL looks valid """
-        if self.repo_url:
-            warnings.warn("REPO URL feature not yet implemented")
+        try:
+            parts = urlparse(self.repo_url)
+
+            if parts.scheme != "http" or parts.scheme != "https":
+                raise ValueError
+        except ValueError:
+            raise VinnieConfigError(f"'{self.repo_url}' is not a valid URL")
 
     def validate_s3(self):
         # We either need no s3 options or all of them
