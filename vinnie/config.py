@@ -37,8 +37,13 @@ class VinnieConfig:
             if key not in ALLOWED_OPTIONS:
                 raise VinnieConfigError(f"Unknown option: {key}")
 
+        # Default to using semver
         if self.semver is None:
             self.semver = True
+
+        # Default to using 'origin' as the remote
+        if self.remote is None:
+            self.remote = "origin"
 
     def validate(self):
         """ Validate that the provided options make sense """
