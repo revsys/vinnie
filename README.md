@@ -11,9 +11,7 @@ Calling `vinnie` on it's own prints the help.
 
 `vinnie version` prints the current version.
 
-`vinnie patch` increments the patch level, creates the tag, and pushes it.
-`vinnie minor` increments the minor number, creates the tag, and pushes it.
-`vinnie patch` increments the major number, creates the tag, and pushes it.
+`vinnie (patch|minor|major)` increments the version number of the given level, creates the tag, and pushes it.
 
 `vinnie next (patch|minor|major)` determines the _next_ version number of the
 given level and prints it to stdout.
