@@ -83,6 +83,29 @@ the following map to the given option
 - `VINNIE_REMOTE` sets `--remote`
 - `VINNIE_MARKER` sets `--marker`
 
+## Examples
+
+Let's start off with a simple example:
+
+```shell
+$ cd my-git-repo
+$ vinnie version
+0.0.0
+$ vinnie patch
+0.0.1
+```
+
+Or maybe you want to use a prefix on with a project that already has been
+using semver in a pattern of `vX.Y.Z` in tags, you would then just need to do:
+
+```shell
+$ cd my-git-repo
+$ vinnie --prefix=v version
+v1.2.3
+$ vinnie --prefix=v minor
+v1.3.0
+```
+
 ## Similar Projects
 
 Vinnie is very similar to these other fine projects:
