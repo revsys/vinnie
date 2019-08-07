@@ -1,4 +1,11 @@
+import os
 from setuptools import setup
+
+# Load the README.md
+BASE_DIR = os.path.dirname(__file__)
+f = open(os.path.join(BASE_DIR, "README.md"))
+readme = f.read()
+f.close()
 
 setup(
     name="vinnie",
