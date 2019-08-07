@@ -10,21 +10,8 @@ def repo_path(relative):
 
 
 def test_version(repo):
-    v = Vinnie(repo=repo)
-    assert v.version() == "v0.0.2"
-
-
-def test_add_prefix(repo):
-    v = Vinnie(repo=repo, prefix="foo")
-    assert v.add_prefix("3.0.0") == "foo3.0.0"
-
-    v = Vinnie(repo=repo)
-    assert v.add_prefix("3.0.0") == "3.0.0"
-
-
-def test_strip_prefix(repo):
     v = Vinnie(repo=repo, prefix="v")
-    assert v.strip_prefix("v1.0.0") == "1.0.0"
+    assert v.version() == "v0.0.2"
 
 
 def test_current_version(repo):
@@ -98,3 +85,13 @@ def test_major(repo):
     assert v.version() == "v0.0.2"
     assert v.next_major() == "v1.0.0"
     assert v.version() == "v1.0.0"
+
+
+def test_version_mixed(mixed_repo):
+    v = Vinnie(repo=mixed_repo, prefix="v")
+    assert v.version() == "v0.0.2"
+
+
+def test_version_mixed2(mixed_repo2):
+    v = Vinnie(repo=mixed_repo2, prefix="v")
+    assert v.version() == "v0.0.1"

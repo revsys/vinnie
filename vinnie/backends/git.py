@@ -1,3 +1,4 @@
+import semver
 import warnings
 
 from git import Repo
@@ -16,9 +17,28 @@ class VinnieGit(BaseBackend):
     def get_current_version(self):
         """ Get the current version """
         try:
-            return self.repo.git.describe(tags=True)
+            version = self.repo.git.describe(tags=True)
         except GitCommandError:
-            return self.get_initial_version()
+            version = self.get_initial_version()
+
+        # If this looks to be a good version, use it otherwise
+        # we need to dig back into older tags to find the most recent
+        # version (semver or incrementing integer)
+        if self.validate_version(version):
+            return version
+        else:
+            version = self.get_latest_tag()
+            if self.validate_version(version):
+                return version
+            else:
+                return self.get_initial_version()
+
+    def get_all_tags(self):
+        """
+        Get all of the tags from this git repository and find the largest
+        version number
+        """
+        return self.repo.tags
 
     def tag_version(self, value, remote="origin"):
         self.repo.create_tag(value, message=f"Version '{value}' set by vinnie")
