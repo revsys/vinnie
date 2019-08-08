@@ -1,5 +1,5 @@
 import os
-from setuptools import setup
+from setuptools import find_packages, setup
 
 # Load the README.md
 BASE_DIR = os.path.dirname(__file__)
@@ -10,7 +10,7 @@ f.close()
 setup(
     name="vinnie",
     version="0.5.1",
-    py_modules=["vinnie"],
+    packages=find_packages(exclude=["tests", "tests.*"]),
     install_requires=["Click==7.0", "semver==2.8.1", "GitPython==2.1.11"],
     tests_require=["pytest==5.0.1", "pytest-sugar==0.9.2", "pytest-cov==2.7.1"],
     long_description=readme,
