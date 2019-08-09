@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 from .exceptions import VinnieConfigError
 
 ALLOWED_OPTIONS = [
+    "push",
     "repo",
     "repo_url",
     "ssh_key",
