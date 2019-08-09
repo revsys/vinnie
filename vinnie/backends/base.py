@@ -89,8 +89,11 @@ class BaseBackend:
     def get_current_version(self):
         raise NotImplementedError
 
-    def tag_version(self, value, remote="origin"):
+    def tag_version(self, value):
         raise NotImplementedError
 
     def get_all_tags(self):
+        raise NotImplementedError
+
+    def push(self, remote="origin"):
         raise NotImplementedError

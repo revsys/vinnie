@@ -20,7 +20,7 @@ Calling `vinnie` on it's own prints the help.
 
 `vinnie version` prints the current version to stdout.
 
-`vinnie (patch|minor|major)` increments the version number of the given level, creates the tag, and pushes it.
+`vinnie (patch|minor|major)` increments the version number of the given level, creates the tag, and pushes it. You can skip pushing by using `vinnie --no-push`
 
 `vinnie next (patch|minor|major)` determines the _next_ version number of the
 given level and prints it to stdout.
@@ -54,6 +54,8 @@ $ vinnie --semver=False bump
 
 `--gitlab-token` Gitlab API token
 
+`--push/--no-push` push or don't push to the repo. Default is to push.
+
 `--prefix` allows you to set an optional text prefix to all version numbers for
 example, `vinnie --prefix=v` would create version numbers such as `v0.0.1`.
 
@@ -74,6 +76,7 @@ the following map to the given option
 - `VINNIE_SSH_KEY` sets `--ssh-key`
 - `VINNIE_GITHUB_TOKEN` sets `--github-token`
 - `VINNIE_GITLAB_TOKEN` sets `--gitlab-token`
+- `VINNIE_REPO_PUSH` sets `--push`
 - `VINNIE_PREFIX` sets `--prefix`
 - `VINNIE_SEMVER` sets `--semver`
 - `VINNIE_S3_ACCESS_KEY` sets `--s3-access-key`

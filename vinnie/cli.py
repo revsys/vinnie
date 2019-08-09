@@ -5,6 +5,7 @@ from .base import Vinnie
 
 
 @click.group(invoke_without_command=True)
+@click.option("--push/--no-push", envvar="VINNIE_PUSH", default=True)
 @click.option("--repo", envvar="VINNIE_REPO_PATH", default=".")
 @click.option("--repo-url", envvar="VINNIE_REPO_URL", default=None)
 @click.option("--ssh-key", envvar="VINNIE_SSH_KEY", default=None)

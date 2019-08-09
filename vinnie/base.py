@@ -1,3 +1,5 @@
+import warnings
+
 import semver
 import re
 
@@ -78,22 +80,32 @@ class Vinnie:
         current = self.strip_prefix(self.version())
         return self.add_prefix(semver.bump_major(current))
 
+    def push(self, remote):
+        if self.config.push:
+            self.backend.push(remote)
+        else:
+            warnings.warn("Skipping push.", UserWarning)
+
     def next_bump(self):
         next_value = self.get_next_bump()
-        self.backend.tag_version(next_value, remote=self.config.remote)
+        self.backend.tag_version(next_value)
+        self.push(self.config.remote)
         return next_value
 
     def next_patch(self):
         next_value = self.get_next_patch()
-        self.backend.tag_version(next_value, remote=self.config.remote)
+        self.backend.tag_version(next_value)
+        self.push(self.config.remote)
         return next_value
 
     def next_minor(self):
         next_value = self.get_next_minor()
-        self.backend.tag_version(next_value, remote=self.config.remote)
+        self.backend.tag_version(next_value)
+        self.push(self.config.remote)
         return next_value
 
     def next_major(self):
         next_value = self.get_next_major()
-        self.backend.tag_version(next_value, remote=self.config.remote)
+        self.backend.tag_version(next_value)
+        self.push(self.config.remote)
         return next_value
