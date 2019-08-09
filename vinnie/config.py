@@ -101,8 +101,8 @@ class VinnieConfig:
 
     def validate_keys_and_tokens(self):
         """ Ensure we have an SSH key or a token, but not more than we need """
-        if any((self.ssh_key, self.github_token, self.gitlab_token)):
-            warnings.warn("SSH and API token features not yet implemented")
+        if any((self.github_token, self.gitlab_token)):
+            warnings.warn("API token features not yet implemented")
 
     def validate_repo_url(self):
         """ Ensure repo URL looks valid """

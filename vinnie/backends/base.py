@@ -95,5 +95,5 @@ class BaseBackend:
     def get_all_tags(self):
         raise NotImplementedError
 
-    def push(self, remote="origin"):
+    def push(self, tag, remote="origin"):
         raise NotImplementedError

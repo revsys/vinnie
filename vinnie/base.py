@@ -8,6 +8,17 @@ from .config import VinnieConfig
 from .exceptions import VinnieConfigError
 
 
+class NullContextManager(object):
+    def __init__(self, *args, **kwargs):
+        pass
+
+    def __enter__(self):
+        pass
+
+    def __exit__(self, *args):
+        pass
+
+
 class Vinnie:
     def __init__(self, **kwargs):
         # Set object properties from all kwargs
@@ -80,32 +91,39 @@ class Vinnie:
         current = self.strip_prefix(self.version())
         return self.add_prefix(semver.bump_major(current))
 
-    def push(self, remote):
+    def push(self, tag, remote):
         if self.config.push:
-            self.backend.push(remote)
+            if self.config.ssh_key is not None:
+                ssh_cmd = f"ssh -i {self.config.ssh_key}"
+                ctx = self.backend.repo.git.custom_environment(GIT_SSH_COMMAND=ssh_cmd)
+            else:
+                ctx = NullContextManager()
+
+            with ctx:
+                self.backend.push(tag, remote)
         else:
             warnings.warn("Skipping push.", UserWarning)
 
     def next_bump(self):
         next_value = self.get_next_bump()
         self.backend.tag_version(next_value)
-        self.push(self.config.remote)
+        self.push(next_value, self.config.remote)
         return next_value
 
     def next_patch(self):
         next_value = self.get_next_patch()
         self.backend.tag_version(next_value)
-        self.push(self.config.remote)
+        self.push(next_value, self.config.remote)
         return next_value
 
     def next_minor(self):
         next_value = self.get_next_minor()
         self.backend.tag_version(next_value)
-        self.push(self.config.remote)
+        self.push(next_value, self.config.remote)
         return next_value
 
     def next_major(self):
         next_value = self.get_next_major()
         self.backend.tag_version(next_value)
-        self.push(self.config.remote)
+        self.push(next_value, self.config.remote)
         return next_value

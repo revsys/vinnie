@@ -43,11 +43,11 @@ class VinnieGit(BaseBackend):
     def tag_version(self, value):
         self.repo.create_tag(value, message=f"Version '{value}' set by vinnie")
 
-    def push(self, remote):
+    def push(self, tag, remote="origin"):
         # See if we have a remote by that name
         try:
             remote = self.repo.remote(remote)
-            remote.push()
+            remote.push(f"refs/tags/{tag}")
         except ValueError:
             warnings.warn(
                 f"Could not find git remote '{remote}'. Tag created, but not pushed."
