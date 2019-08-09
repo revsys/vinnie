@@ -17,7 +17,7 @@ from .base import Vinnie
 @click.option("--s3-url", envvar="VINNIE_S3_URL", default=None)
 @click.option("--current-version", envvar="VINNIE_CURRENT_VERSION", default=None)
 @click.option("--remote", envvar="VINNIE_GIT_REMOTE", default=None)
-@click.option("--marker", envvar="VINNIER_VERSION_MARKER", default="__VINNIE_VERSION__")
+@click.option("--marker", envvar="VINNIE_VERSION_MARKER", default="__VINNIE_VERSION__")
 @click.pass_context
 def cli(ctx, **kwargs):
     """ Vinnie the Versioner """

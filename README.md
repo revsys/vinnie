@@ -80,8 +80,8 @@ the following map to the given option
 - `VINNIE_S3_SECRET_KEY` sets `--s3-secret-key`
 - `VINNIE_S3_URL` sets `--s3-url`
 - `VINNIE_CURRENT_VERSION` sets `--current-version`
-- `VINNIE_REMOTE` sets `--remote`
-- `VINNIE_MARKER` sets `--marker`
+- `VINNIE_GIT_REMOTE` sets `--remote`
+- `VINNIE_VERSION_MARKER` sets `--marker`
 
 ## Examples
 
