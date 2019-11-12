@@ -1,4 +1,4 @@
-# vinnie the versioner
+# Vinnie the Versioner
 
 ## Overview
 
@@ -7,7 +7,7 @@ using only git tags.  This can be done either manually or as part of CI.
 
 ## Motivation
 
-The motivation for building vinnie is somewhat small and trivial. Many existing
+The motivation for building Vinnie is somewhat small and trivial. Many existing
 tools force you to keep the **current version** in a file in your git repository
 which often means that during a CI build process you generate a commit that
 is simply incrementing the version number.  By no means is this the end of the
@@ -28,7 +28,7 @@ given level and prints it to stdout.
 `vinnie replace /path/to/file` will replace the marker (default of `__VINNIE_VERSION__`)
 in this file with the current version.
 
-`vinnie show-config` dumps the current configuration vinnie is operating with,
+`vinnie show-config` dumps the current configuration Vinnie is operating with,
 mostly for debugging.
 
 ## Nonsemantic versioning
@@ -62,9 +62,9 @@ example, `vinnie --prefix=v` would create version numbers such as `v0.0.1`.
 `--semver` sets whether or not you want to use semantic versioning or just an
 incrementing integer. The default is to use semver.
 
-`--current-version` in some situations it's nice to be able to just tell vinnie
+`--current-version` in some situations it's nice to be able to just tell Vinnie
 what the current version is, this option allows you to do that.  In this case,
-vinnie ignores whatever versions actually exist as tags on the repository.
+Vinnie ignores whatever versions actually exist as tags on the repository.
 
 ## Environment Variables
 
