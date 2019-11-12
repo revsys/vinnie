@@ -31,7 +31,7 @@ in this file with the current version.
 `vinnie show-config` dumps the current configuration vinnie is operating with,
 mostly for debugging.
 
-## Non semantic versioning
+## Nonsemantic versioning
 
 Vinnie also supports not using [semver](https://semver.org/) by just using an
 incrementing integer (v1, v2, ... v47) if you with.  To do that you need to
