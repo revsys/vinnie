@@ -16,7 +16,7 @@ mechanism for the current version.
 
 ## Usage
 
-Calling `vinnie` on it's own prints the help.
+Calling `vinnie` on its own prints the help.
 
 `vinnie version` prints the current version to stdout.
 
