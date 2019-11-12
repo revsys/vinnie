@@ -35,7 +35,7 @@ class Vinnie:
         if self.config.repo_url and self.config.github_token:
             self.backend = VinnieGitHub(config=self.config)
 
-        # Gitlab backend
+        # GitLab backend
         if self.config.repo_url and self.config.gitlab_token:
             self.backend = VinnieGitLab(config=self.config)
 

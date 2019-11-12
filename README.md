@@ -52,7 +52,7 @@ $ vinnie --semver=False bump
 
 `--github-token` GitHub API token
 
-`--gitlab-token` Gitlab API token
+`--gitlab-token` GitLab API token
 
 `--push/--no-push` push or don't push to the repo. Default is to push.
 
@@ -123,7 +123,7 @@ Vinnie is very similar to these other fine projects:
 - [ ] Support storing the validation file in S3
 - [ ] Support storing the validation file in GCS
 - [ ] Support versioning without SSH or the repo with GitHub API Token
-- [ ] Support versioning without SSH or the repo with Gitlab API Token
+- [ ] Support versioning without SSH or the repo with GitLab API Token
 
 ## License
 
