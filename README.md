@@ -88,7 +88,7 @@ the following map to the given option
 
 ## Examples
 
-Let's start off with a simple example:
+Let's start with a simple example:
 
 ```shell
 $ cd my-git-repo
