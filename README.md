@@ -34,7 +34,7 @@ mostly for debugging.
 ## Nonsemantic versioning
 
 Vinnie also supports not using [semver](https://semver.org/) by just using an
-incrementing integer (v1, v2, ... v47) if you with.  To do that you need to
+incrementing integer (v1, v2, ... v47) if you wish.  To do that you need to
 always pass in the option `--semver=False` and then the only incrementing
 command to use is bump.
 
