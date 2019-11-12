@@ -1,6 +1,8 @@
 import click
 import os
 
+from git.exc import CommandError as GitCommandError
+
 from .base import Vinnie
 
 
@@ -30,53 +32,78 @@ def cli(ctx, **kwargs):
 
 @cli.command()
 @click.pass_obj
-def bump(v):
+@click.pass_context
+def bump(ctx, v):
     """ Bump incrementing integer version """
-    new_value = v.next_bump()
-    click.echo(new_value)
+    try:
+        new_value = v.next_bump()
+        click.echo(new_value)
+    except ValueError:
+        click.echo("version was not an integer; could not bump.")
+        ctx.exit(1)
 
 
 @cli.command()
 @click.pass_obj
-def patch(v):
+@click.pass_context
+def patch(ctx, v):
     """ Patch version number, tag and push"""
-    new_value = v.next_patch()
-    click.echo(new_value)
+    try:
+        new_value = v.next_patch()
+        click.echo(new_value)
+    except GitCommandError as e:
+        click.echo(str(e))
+        ctx.exit(1)
 
 
 @cli.command()
 @click.pass_obj
-def minor(v):
+@click.pass_context
+def minor(ctx, v):
     """ Increase minor version, tag and push """
-    new_value = v.next_minor()
-    click.echo(new_value)
+    try:
+        new_value = v.next_minor()
+        click.echo(new_value)
+    except GitCommandError as e:
+        click.echo(str(e))
+        ctx.exit(1)
 
 
 @cli.command()
 @click.pass_obj
-def major(v):
+@click.pass_context
+def major(ctx, v):
     """ Increase major version, tag and push """
-    new_value = v.next_major()
-    click.echo(new_value)
+    try:
+        new_value = v.next_major()
+        click.echo(new_value)
+    except GitCommandError as e:
+        click.echo(str(e))
+        ctx.exit(1)
 
 
 @cli.command()
 @click.argument("part")
 @click.pass_obj
-def next(v, part):
+@click.pass_context
+def next(ctx, v, part):
     """ Return next version updating the given part (patch, minor, or major)"""
-    if part == "patch":
-        next_value = v.get_next_patch()
-    elif part == "minor":
-        next_value = v.get_next_minor()
-    elif part == "major":
-        next_value = v.get_next_major()
-    else:
-        raise RuntimeError(
-            f"Unknown next value '{part}'. Must be patch, minor, or major"
-        )
+    try:
+        if part == "patch":
+            next_value = v.get_next_patch()
+        elif part == "minor":
+            next_value = v.get_next_minor()
+        elif part == "major":
+            next_value = v.get_next_major()
+        else:
+            raise RuntimeError(
+                f"Unknown next value '{part}'. Must be patch, minor, or major"
+            )
+        click.echo(next_value)
+    except RuntimeError as e:
+        click.echo(str(e))
+        ctx.exit(1)
 
-    click.echo(next_value)
 
 
 @cli.command()
