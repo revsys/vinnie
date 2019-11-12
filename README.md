@@ -8,7 +8,7 @@ using only git tags.  This can be done either manually or as part of CI.
 ## Motivation
 
 The motivation for building vinnie is somewhat small and trivial. Many existing
-tools force you to keep the "current version" in a file in your git repository
+tools force you to keep the **current version** in a file in your git repository
 which often means that during a CI build process you generate a commit that
 is simply incrementing the version number.  By no means is this the end of the
 world, but we realized we could fairly safely just use git tags as the storage
