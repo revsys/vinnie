@@ -1,4 +1,4 @@
-# vinnie the versioner
+# Vinnie the Versioner
 
 ## Overview
 
@@ -7,8 +7,8 @@ using only git tags.  This can be done either manually or as part of CI.
 
 ## Motivation
 
-The motivation was building vinnie is somewhat small and trivial. Many existing
-tools force you to keep the "current version" in a file in your git repository
+The motivation for building Vinnie is somewhat small and trivial. Many existing
+tools force you to keep the **current version** in a file in your git repository
 which often means that during a CI build process you generate a commit that
 is simply incrementing the version number.  By no means is this the end of the
 world, but we realized we could fairly safely just use git tags as the storage
@@ -16,7 +16,7 @@ mechanism for the current version.
 
 ## Usage
 
-Calling `vinnie` on it's own prints the help.
+Calling `vinnie` on its own prints the help.
 
 `vinnie version` prints the current version to stdout.
 
@@ -28,13 +28,13 @@ given level and prints it to stdout.
 `vinnie replace /path/to/file` will replace the marker (default of `__VINNIE_VERSION__`)
 in this file with the current version.
 
-`vinnie show-config` dumps the current configuration vinnie is operating with,
+`vinnie show-config` dumps the current configuration Vinnie is operating with,
 mostly for debugging.
 
-## Non semantic versioning
+## Nonsemantic versioning
 
 Vinnie also supports not using [semver](https://semver.org/) by just using an
-incrementing integer (v1, v2, ... v47) if you with.  To do that you need to
+incrementing integer (v1, v2, ... v47) if you wish.  To do that you need to
 always pass in the option `--semver=False` and then the only incrementing
 command to use is bump.
 
@@ -50,21 +50,21 @@ $ vinnie --semver=False bump
 
 `--ssh-key` path to the ssh key to use on disk
 
-`--github-token` Github API token
+`--github-token` GitHub API token
 
-`--gitlab-token` Gitlab API token
+`--gitlab-token` GitLab API token
 
-`--push/--no-push` push or don't push to the repo. Default is to push.
+`--push/--no-push` push or don't push to the repo. The default is to push.
 
-`--prefix` allows you to set an optional text prefix to all version numbers for
+`--prefix` allows you to set an optional text prefix to all version numbers, for
 example, `vinnie --prefix=v` would create version numbers such as `v0.0.1`.
 
 `--semver` sets whether or not you want to use semantic versioning or just an
 incrementing integer. The default is to use semver.
 
-`--current-version` in some situations it's nice to be able to just tell vinnie
+`--current-version` in some situations it's nice to be able to just tell Vinnie
 what the current version is, this option allows you to do that.  In this case,
-vinnie ignores whatever versions actually exist as tags on the repository.
+Vinnie ignores whatever versions actually exist as tags on the repository.
 
 ## Environment Variables
 
@@ -88,7 +88,7 @@ the following map to the given option
 
 ## Examples
 
-Let's start off with a simple example:
+Let's start with a simple example:
 
 ```shell
 $ cd my-git-repo
@@ -122,8 +122,8 @@ Vinnie is very similar to these other fine projects:
 - [ ] `vinnie validate` checks that tags haven't moved
 - [ ] Support storing the validation file in S3
 - [ ] Support storing the validation file in GCS
-- [ ] Support versioning without SSH or the repo with Github API Token
-- [ ] Support versioning without SSH or the repo with Gitlab API Token
+- [ ] Support versioning without SSH or the repo with GitHub API Token
+- [ ] Support versioning without SSH or the repo with GitLab API Token
 
 ## License
 
