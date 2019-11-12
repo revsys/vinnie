@@ -54,7 +54,7 @@ $ vinnie --semver=False bump
 
 `--gitlab-token` GitLab API token
 
-`--push/--no-push` push or don't push to the repo. Default is to push.
+`--push/--no-push` push or don't push to the repo. The default is to push.
 
 `--prefix` allows you to set an optional text prefix to all version numbers for
 example, `vinnie --prefix=v` would create version numbers such as `v0.0.1`.
