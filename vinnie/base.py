@@ -31,7 +31,7 @@ class Vinnie:
         if not self.config.repo_url:
             self.backend = VinnieGit(config=self.config)
 
-        # Github API backend
+        # GitHub API backend
         if self.config.repo_url and self.config.github_token:
             self.backend = VinnieGitHub(config=self.config)
 

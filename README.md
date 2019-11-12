@@ -50,7 +50,7 @@ $ vinnie --semver=False bump
 
 `--ssh-key` path to the ssh key to use on disk
 
-`--github-token` Github API token
+`--github-token` GitHub API token
 
 `--gitlab-token` Gitlab API token
 
@@ -122,7 +122,7 @@ Vinnie is very similar to these other fine projects:
 - [ ] `vinnie validate` checks that tags haven't moved
 - [ ] Support storing the validation file in S3
 - [ ] Support storing the validation file in GCS
-- [ ] Support versioning without SSH or the repo with Github API Token
+- [ ] Support versioning without SSH or the repo with GitHub API Token
 - [ ] Support versioning without SSH or the repo with Gitlab API Token
 
 ## License
