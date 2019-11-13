@@ -1,7 +1,6 @@
-import warnings
-
 import semver
 import re
+import click
 
 from .backends import VinnieGit, VinnieGitHub, VinnieGitLab
 from .config import VinnieConfig
@@ -89,7 +88,7 @@ class Vinnie:
         if self.config.push:
             self.backend.push(remote)
         else:
-            warnings.warn("Skipping push.", UserWarning)
+            click.echo("Skipping push.", err=True)
 
     def next_bump(self):
         next_value = self.get_next_bump()
