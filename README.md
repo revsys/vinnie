@@ -59,6 +59,10 @@ $ vinnie --semver=False bump
 `--prefix` allows you to set an optional text prefix to all version numbers, for
 example, `vinnie --prefix=v` would create version numbers such as `v0.0.1`.
 
+`--omit-prefix` suppresses the prefix from output. The tag will be processed
+using the prefix, but the output will just contain the version numbers such as
+`0.0.1`.
+
 `--semver` sets whether or not you want to use semantic versioning or just an
 incrementing integer. The default is to use semver.
 
@@ -78,6 +82,7 @@ the following map to the given option
 - `VINNIE_GITLAB_TOKEN` sets `--gitlab-token`
 - `VINNIE_REPO_PUSH` sets `--push`
 - `VINNIE_PREFIX` sets `--prefix`
+- `VINNIE_OMIT_PREFIX` sets `--omit-prefix`
 - `VINNIE_SEMVER` sets `--semver`
 - `VINNIE_S3_ACCESS_KEY` sets `--s3-access-key`
 - `VINNIE_S3_SECRET_KEY` sets `--s3-secret-key`

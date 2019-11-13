@@ -51,6 +51,11 @@ class Vinnie:
             value = re.sub(f"^{self.config.prefix}", "", value)
         return value
 
+    def omit_prefix(self, value):
+        if self.config.omit_prefix:
+            value = self.strip_prefix(value)
+        return value
+
     def add_prefix(self, value):
         if self.config.prefix:
             value = f"{self.config.prefix}{value}"
