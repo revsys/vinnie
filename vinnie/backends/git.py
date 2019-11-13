@@ -40,9 +40,10 @@ class VinnieGit(BaseBackend):
         """
         return self.repo.tags
 
-    def tag_version(self, value, remote):
+    def tag_version(self, value):
         self.repo.create_tag(value, message=f"Version '{value}' set by vinnie")
 
+    def push(self, remote):
         # See if we have a remote by that name
         try:
             remote = self.repo.remote(remote)

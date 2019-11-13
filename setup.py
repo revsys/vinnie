@@ -13,6 +13,9 @@ setup(
     packages=find_packages(exclude=["tests", "tests.*"]),
     install_requires=["Click==7.0", "semver==2.8.1", "GitPython==2.1.11"],
     tests_require=["pytest==5.0.1", "pytest-sugar==0.9.2", "pytest-cov==2.7.1"],
+    setup_requires=[
+        'pytest-runner',
+    ],
     long_description=readme,
     long_description_content_type="text/markdown",
     author="Frank Wiles",

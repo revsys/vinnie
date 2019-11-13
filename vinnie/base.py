@@ -1,5 +1,6 @@
 import semver
 import re
+import click
 
 from .backends import VinnieGit, VinnieGitHub, VinnieGitLab
 from .config import VinnieConfig
@@ -29,11 +30,11 @@ class Vinnie:
         if not self.config.repo_url:
             self.backend = VinnieGit(config=self.config)
 
-        # Github API backend
+        # GitHub API backend
         if self.config.repo_url and self.config.github_token:
             self.backend = VinnieGitHub(config=self.config)
 
-        # Gitlab backend
+        # GitLab backend
         if self.config.repo_url and self.config.gitlab_token:
             self.backend = VinnieGitLab(config=self.config)
 
@@ -47,6 +48,11 @@ class Vinnie:
     def strip_prefix(self, value):
         if self.config.prefix:
             value = re.sub(f"^{self.config.prefix}", "", value)
+        return value
+
+    def omit_prefix(self, value):
+        if self.config.omit_prefix:
+            value = self.strip_prefix(value)
         return value
 
     def add_prefix(self, value):
@@ -78,22 +84,32 @@ class Vinnie:
         current = self.strip_prefix(self.version())
         return self.add_prefix(semver.bump_major(current))
 
+    def push(self, remote):
+        if self.config.push:
+            self.backend.push(remote)
+        else:
+            click.echo("Skipping push.", err=True)
+
     def next_bump(self):
         next_value = self.get_next_bump()
-        self.backend.tag_version(next_value, remote=self.config.remote)
+        self.backend.tag_version(next_value)
+        self.push(self.config.remote)
         return next_value
 
     def next_patch(self):
         next_value = self.get_next_patch()
-        self.backend.tag_version(next_value, remote=self.config.remote)
+        self.backend.tag_version(next_value)
+        self.push(self.config.remote)
         return next_value
 
     def next_minor(self):
         next_value = self.get_next_minor()
-        self.backend.tag_version(next_value, remote=self.config.remote)
+        self.backend.tag_version(next_value)
+        self.push(self.config.remote)
         return next_value
 
     def next_major(self):
         next_value = self.get_next_major()
-        self.backend.tag_version(next_value, remote=self.config.remote)
+        self.backend.tag_version(next_value)
+        self.push(self.config.remote)
         return next_value
