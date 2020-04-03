@@ -13,7 +13,9 @@ ALLOWED_OPTIONS = [
     "github_token",
     "gitlab_token",
     "prefix",
+    "suffix",
     "omit_prefix",
+    "omit_suffix",
     "semver",
     "s3_access_key",
     "s3_secret_key",
@@ -46,6 +48,10 @@ class VinnieConfig:
         # Default to not using omit-prefix
         if self.omit_prefix is None:
             self.omit_prefix = False
+
+        # Default to not using omit-prefix
+        if self.omit_suffix is None:
+            self.omit_suffix = False
 
         # Default to using 'origin' as the remote
         if self.remote is None:
