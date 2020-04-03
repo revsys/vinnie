@@ -62,3 +62,13 @@ def test_show_config(repo):
     runner = CliRunner()
     result = runner.invoke(cli, [f"--repo={repo}", "--prefix=v", "show-config"])
     assert result.exit_code == 0
+
+
+def test_suffix(repo):
+    runner = CliRunner()
+    result = runner.invoke(
+        cli, [f"--repo={repo}", "--suffix=foo", "next", "patch"]
+    )
+    assert result.exit_code == 0
+    assert result.output == "0.0.1-foo\n"
+
