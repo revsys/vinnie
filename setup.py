@@ -9,7 +9,7 @@ f.close()
 
 setup(
     name="vinnie",
-    version="0.6.1",
+    version="0.7.0",
     packages=find_packages(exclude=["tests", "tests.*"]),
     install_requires=["Click>=7.1,<7.2", "semver==2.13.0", "GitPython==3.1.13"],
     tests_require=["pytest==5.0.1", "pytest-sugar==0.9.2", "pytest-cov==2.7.1"],
