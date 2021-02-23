@@ -45,9 +45,18 @@ class Vinnie:
     def dump(self):
         self.config.dump()
 
+
+    def version_only(self, value):
+        return self.strip_bread(value)
+
     def strip_prefix(self, value):
         if self.config.prefix:
             value = re.sub(f"^{self.config.prefix}", "", value)
+        return value
+
+    def strip_suffix(self, value):
+        if self.config.suffix:
+            value = re.sub(f"-{self.config.suffix}$", "", value)
         return value
 
     def omit_prefix(self, value):
@@ -55,10 +64,29 @@ class Vinnie:
             value = self.strip_prefix(value)
         return value
 
+    def omit_bread(self, value):
+        return self.omit_prefix(self.omit_suffix(value))
+
+    def omit_suffix(self, value):
+        if self.config.omit_suffix:
+            value = self.strip_suffix(value)
+        return value
+
     def add_prefix(self, value):
         if self.config.prefix:
             value = f"{self.config.prefix}{value}"
         return value
+
+    def add_suffix(self, value):
+        if self.config.suffix:
+            value = f"{value}-{self.config.suffix}"
+        return value
+
+    def add_bread(self, value):
+        return self.add_prefix(self.add_suffix(value))
+
+    def strip_bread(self, value):
+        return self.strip_prefix(self.strip_suffix(value))
 
     def version(self):
         """ Return the current version """
@@ -68,21 +96,24 @@ class Vinnie:
             return self.backend.get_current_version()
 
     def get_next_bump(self):
-        current = self.strip_prefix(self.version())
+        current = self.strip_bread(self.version())
         next_integer = str(int(current) + 1)
-        return self.add_prefix(next_integer)
+        return self.add_bread(next_integer)
 
     def get_next_patch(self):
-        current = self.strip_prefix(self.version())
-        return self.add_prefix(semver.bump_patch(current))
+        current = self.version_only(self.version())
+        new = semver.bump_patch(current)
+        return self.add_bread(new)
 
     def get_next_minor(self):
-        current = self.strip_prefix(self.version())
-        return self.add_prefix(semver.bump_minor(current))
+        current = self.strip_bread(self.version())
+        new = semver.bump_minor(current)
+        return self.add_bread(new)
 
     def get_next_major(self):
-        current = self.strip_prefix(self.version())
-        return self.add_prefix(semver.bump_major(current))
+        current = self.strip_bread(self.version())
+        new = semver.bump_major(current)
+        return self.add_bread(new)
 
     def push(self, remote):
         if self.config.push:

@@ -22,21 +22,37 @@ class BaseBackend:
             value = re.sub(f"^{self.config.prefix}", "", value)
         return value
 
+    def strip_suffix(self, value):
+        if self.config.suffix:
+            value = re.sub(f"{self.config.suffix}$", "", value)
+        return value
+
     def add_prefix(self, value):
         if self.config.prefix:
             value = f"{self.config.prefix}{value}"
+        return value
+
+    def add_suffix(self, value):
+        if self.config.suffix:
+            value = f"{value}{self.config.suffix}"
         return value
 
     def validate_version(self, value):
         if value is None:
             return False
 
-        # If we have a prefix and don't start with it, not a version
-        if self.config.prefix and not value.startswith(self.config.prefix):
+        # If we have (pre|suf)fix and don't (start/end) with it, not a version
+        if  (self.config.prefix and not value.startswith(self.config.prefix)) or \
+            (self.config.suffix and not value.endswith(self.config.suffix)):
             return False
 
+
         # Strip off the prefix to apply regex
-        value = re.sub(f"^{self.config.prefix}", "", value)
+        value = re.sub(
+            fr'^(?:{self.config.prefix})?(.*)(?:{self.config.suffix})?$',
+            r'\1',
+            value
+        )
 
         m = re.fullmatch(
             r"""^

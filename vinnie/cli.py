@@ -14,7 +14,9 @@ from .base import Vinnie
 @click.option("--github-token", envvar="VINNIE_GITHUB_TOKEN", default=None)
 @click.option("--gitlab-token", envvar="VINNIE_GITLAB_TOKEN", default=None)
 @click.option("--prefix", envvar="VINNIE_TAG_PREFIX", default="")
+@click.option("--suffix", envvar="VINNIE_TAG_SUFFIX", default="")
 @click.option("--omit-prefix", envvar="VINNIE_OMIT_PREFIX", default=False, is_flag=True)
+@click.option("--omit-suffix", envvar="VINNIE_OMIT_SUFFIX", default=False, is_flag=True)
 @click.option("--semver", envvar="VINNIE_SEMVER", default=True)
 @click.option("--s3-access-key", envvar="VINNIE_S3_ACCESS_KEY", default=None)
 @click.option("--s3-secret-key", envvar="VINNIE_S3_SECRET_KEY", default=None)
@@ -39,7 +41,7 @@ def bump(ctx, v):
     """ Bump incrementing integer version """
     try:
         new_value = v.next_bump()
-        new_value = v.omit_prefix(new_value)
+        new_value = v.omit_bread(new_value)
         click.echo(new_value)
     except ValueError:
         click.echo("version was not an integer; could not bump.")
@@ -51,9 +53,11 @@ def bump(ctx, v):
 @click.pass_context
 def patch(ctx, v):
     """ Patch version number, tag and push"""
+    click.echo(str(v.__dict__))
+
     try:
         new_value = v.next_patch()
-        new_value = v.omit_prefix(new_value)
+        new_value = v.omit_bread(new_value)
         click.echo(new_value)
     except GitCommandError as e:
         click.echo(str(e))
@@ -67,7 +71,7 @@ def minor(ctx, v):
     """ Increase minor version, tag and push """
     try:
         new_value = v.next_minor()
-        new_value = v.omit_prefix(new_value)
+        new_value = v.omit_bread(new_value)
         click.echo(new_value)
     except GitCommandError as e:
         click.echo(str(e))
@@ -81,7 +85,7 @@ def major(ctx, v):
     """ Increase major version, tag and push """
     try:
         new_value = v.next_major()
-        new_value = v.omit_prefix(new_value)
+        new_value = v.omit_bread(new_value)
         click.echo(new_value)
     except GitCommandError as e:
         click.echo(str(e))
@@ -105,7 +109,7 @@ def next(ctx, v, part):
             raise RuntimeError(
                 f"Unknown next value '{part}'. Must be patch, minor, or major"
             )
-        next_value = v.omit_prefix(next_value)
+        next_value = v.omit_bread(next_value)
         click.echo(next_value)
     except RuntimeError as e:
         click.echo(str(e))
@@ -118,7 +122,6 @@ def next(ctx, v, part):
 def version(v):
     """ Print current version to stdout """
     version = v.version()
-    version = v.omit_prefix(version)
     click.echo(version)
 
 
@@ -141,7 +144,7 @@ def validate(v):
 def replace(v, filename):
     """ Replace placeholder with current version """
     version = v.version()
-    version = v.omit_prefix(version)
+    version = v.omit_bread(version)
 
     temp_filename = f"{filename}.tmp"
     f = open(temp_filename, "w+")

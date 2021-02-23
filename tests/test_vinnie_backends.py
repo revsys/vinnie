@@ -62,3 +62,16 @@ def test_strip_prefix(repo):
     b = BaseBackend(config=VinnieConfig(prefix="v"))
     assert b.strip_prefix("v1.0.0") == "1.0.0"
 
+
+def test_add_suffix(repo):
+    b = BaseBackend(config=VinnieConfig(suffix="foo"))
+    assert b.add_suffix("3.0.0") == "3.0.0foo"
+
+    b = BaseBackend(config=VinnieConfig())
+    assert b.add_suffix("3.0.0") == "3.0.0"
+
+
+def test_strip_suffix(repo):
+    b = BaseBackend(config=VinnieConfig(suffix="-beta"))
+    assert b.strip_suffix("1.0.0-beta") == "1.0.0"
+
