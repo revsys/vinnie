@@ -55,7 +55,7 @@ def test_next_major(repo):
 
 
 def test_bump(non_semver_repo):
-    v = Vinnie(repo=non_semver_repo, prefix="v")
+    v = Vinnie(repo=non_semver_repo, prefix="v", semver=False)
     assert v.version() == "v2"
     assert v.next_bump() == "v3"
 

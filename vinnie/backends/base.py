@@ -76,13 +76,18 @@ class BaseBackend:
             this_tag = str(t)
 
             if self.validate_version(this_tag):
-                if (
-                    semver.compare(
-                        self.strip_prefix(this_tag), self.strip_prefix(newest_version)
-                    )
-                    == 1
-                ):
-                    newest_version = this_tag
+                if self.config.semver:
+                    if (
+                        semver.compare(
+                            self.strip_prefix(this_tag),
+                            self.strip_prefix(newest_version),
+                        )
+                        == 1
+                    ):
+                        newest_version = this_tag
+                else:
+                    if self.strip_prefix(this_tag) > self.strip_prefix(newest_version):
+                        newest_version = this_tag
 
         return newest_version
 

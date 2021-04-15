@@ -15,7 +15,7 @@ from .base import Vinnie
 @click.option("--gitlab-token", envvar="VINNIE_GITLAB_TOKEN", default=None)
 @click.option("--prefix", envvar="VINNIE_TAG_PREFIX", default="")
 @click.option("--omit-prefix", envvar="VINNIE_OMIT_PREFIX", default=False, is_flag=True)
-@click.option("--semver", envvar="VINNIE_SEMVER", default=True)
+@click.option("--semver/--no-semver", envvar="VINNIE_SEMVER", default=True)
 @click.option("--s3-access-key", envvar="VINNIE_S3_ACCESS_KEY", default=None)
 @click.option("--s3-secret-key", envvar="VINNIE_S3_SECRET_KEY", default=None)
 @click.option("--s3-url", envvar="VINNIE_S3_URL", default=None)
@@ -101,6 +101,8 @@ def next(ctx, v, part):
             next_value = v.get_next_minor()
         elif part == "major":
             next_value = v.get_next_major()
+        elif part == "bump":
+            next_value = v.get_next_bump()
         else:
             raise RuntimeError(
                 f"Unknown next value '{part}'. Must be patch, minor, or major"
@@ -110,7 +112,6 @@ def next(ctx, v, part):
     except RuntimeError as e:
         click.echo(str(e))
         ctx.exit(1)
-
 
 
 @cli.command()

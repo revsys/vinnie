@@ -63,8 +63,8 @@ example, `vinnie --prefix=v` would create version numbers such as `v0.0.1`.
 using the prefix, but the output will just contain the version numbers such as
 `0.0.1`.
 
-`--semver` sets whether or not you want to use semantic versioning or just an
-incrementing integer. The default is to use semver.
+`--semver/--no-semver` sets whether or not you want to use semantic versioning
+or just an incrementing integer. The default is to use semver.
 
 `--current-version` in some situations it's nice to be able to just tell Vinnie
 what the current version is, this option allows you to do that.  In this case,
@@ -83,13 +83,14 @@ the following map to the given option
 - `VINNIE_REPO_PUSH` sets `--push`
 - `VINNIE_PREFIX` sets `--prefix`
 - `VINNIE_OMIT_PREFIX` sets `--omit-prefix`
-- `VINNIE_SEMVER` sets `--semver`
 - `VINNIE_S3_ACCESS_KEY` sets `--s3-access-key`
 - `VINNIE_S3_SECRET_KEY` sets `--s3-secret-key`
 - `VINNIE_S3_URL` sets `--s3-url`
 - `VINNIE_CURRENT_VERSION` sets `--current-version`
 - `VINNIE_GIT_REMOTE` sets `--remote`
 - `VINNIE_VERSION_MARKER` sets `--marker`
+- `VINNIE_SEMVER=False` sets `--no-semver`
+- `VINNIE_SEMVER=True` sets `--semver` which is the default
 
 ## Examples
 
