@@ -52,8 +52,9 @@ def test_next_invalid(repo):
 def test_bump(non_semver_repo):
     runner = CliRunner()
     result = runner.invoke(
-        cli, [f"--repo={non_semver_repo}", "--prefix=v", "--semver=False", "bump"]
+        cli, [f"--repo={non_semver_repo}", "--prefix=v", "--no-semver", "bump"]
     )
+    print(result)
     assert result.exit_code == 0
     assert result.output == "v3\n"
 

@@ -1,4 +1,3 @@
-import semver
 import warnings
 
 from git import Repo
@@ -15,23 +14,11 @@ class VinnieGit(BaseBackend):
         self.repo = Repo(self.config.repo)
 
     def get_current_version(self):
-        """ Get the current version """
-        try:
-            version = self.repo.git.describe(tags=True)
-        except GitCommandError:
-            version = self.get_initial_version()
-
-        # If this looks to be a good version, use it otherwise
-        # we need to dig back into older tags to find the most recent
-        # version (semver or incrementing integer)
+        version = self.get_latest_tag()
         if self.validate_version(version):
             return version
         else:
-            version = self.get_latest_tag()
-            if self.validate_version(version):
-                return version
-            else:
-                return self.get_initial_version()
+            return self.get_initial_version()
 
     def get_all_tags(self):
         """
