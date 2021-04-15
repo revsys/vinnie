@@ -1,4 +1,3 @@
-import semver
 import warnings
 
 from git import Repo
