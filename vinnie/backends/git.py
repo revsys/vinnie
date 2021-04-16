@@ -1,7 +1,6 @@
 import warnings
 
 from git import Repo
-from git.exc import GitCommandError
 
 from .base import BaseBackend
 
