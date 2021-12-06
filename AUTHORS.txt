@@ -3,4 +3,4 @@ Originally written by Frank Wiles <frank@revsys.com>.
 Additional contributions from: 
 
  - MaT1g3R (https://github.com/MaT1g3R) 
-
+ - Daniel Lindsley (https://github.com/toastdriven)
