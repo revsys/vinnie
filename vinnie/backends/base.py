@@ -11,7 +11,7 @@ class BaseBackend:
         self.config = kwargs["config"]
 
     def get_initial_version(self):
-        """ Set our initial version number(s) """
+        """Set our initial version number(s)"""
         if self.config.semver:
             return "0.0.0"
         else:
@@ -56,7 +56,7 @@ class BaseBackend:
             return False
 
     def get_latest_tag(self):
-        """ Return the latest version looking tag """
+        """Return the latest version looking tag"""
         # Grab ALL of the tags first
         tags = self.get_all_tags()
 
@@ -86,8 +86,12 @@ class BaseBackend:
                     ):
                         newest_version = this_tag
                 else:
-                    if self.strip_prefix(this_tag) > self.strip_prefix(newest_version):
+                    if int(self.strip_prefix(this_tag)) > int(
+                        self.strip_prefix(newest_version)
+                    ):
                         newest_version = this_tag
+                        striped_this = self.strip_prefix(this_tag)
+                        striped_newest = self.strip_prefix(newest_version)
 
         return newest_version
 
