@@ -16,9 +16,6 @@ from .base import Vinnie
 @click.option("--prefix", envvar="VINNIE_TAG_PREFIX", default="")
 @click.option("--omit-prefix", envvar="VINNIE_OMIT_PREFIX", default=False, is_flag=True)
 @click.option("--semver/--no-semver", envvar="VINNIE_SEMVER", default=True)
-@click.option("--s3-access-key", envvar="VINNIE_S3_ACCESS_KEY", default=None)
-@click.option("--s3-secret-key", envvar="VINNIE_S3_SECRET_KEY", default=None)
-@click.option("--s3-url", envvar="VINNIE_S3_URL", default=None)
 @click.option("--current-version", envvar="VINNIE_CURRENT_VERSION", default=None)
 @click.option("--remote", envvar="VINNIE_GIT_REMOTE", default=None)
 @click.option("--marker", envvar="VINNIE_VERSION_MARKER", default="__VINNIE_VERSION__")
@@ -121,16 +118,6 @@ def version(v):
     version = v.version()
     version = v.omit_prefix(version)
     click.echo(version)
-
-
-@cli.command()
-@click.pass_obj
-def validate(v):
-    """
-    TODO - Store tag/sha combos in a file (local, S3, GCS) to validate that no
-    tags have moved since the last run. Store new tags
-    """
-    raise NotImplementedError("This feature is not implemented yet.")
 
 
 @cli.command()

@@ -83,9 +83,6 @@ the following map to the given option
 - `VINNIE_REPO_PUSH` sets `--push`
 - `VINNIE_PREFIX` sets `--prefix`
 - `VINNIE_OMIT_PREFIX` sets `--omit-prefix`
-- `VINNIE_S3_ACCESS_KEY` sets `--s3-access-key`
-- `VINNIE_S3_SECRET_KEY` sets `--s3-secret-key`
-- `VINNIE_S3_URL` sets `--s3-url`
 - `VINNIE_CURRENT_VERSION` sets `--current-version`
 - `VINNIE_GIT_REMOTE` sets `--remote`
 - `VINNIE_VERSION_MARKER` sets `--marker`
@@ -125,9 +122,6 @@ Vinnie is very similar to these other fine projects:
 
 ## Roadmap / TODO
 
-- [ ] `vinnie validate` checks that tags haven't moved
-- [ ] Support storing the validation file in S3
-- [ ] Support storing the validation file in GCS
 - [ ] Support versioning without SSH or the repo with GitHub API Token
 - [ ] Support versioning without SSH or the repo with GitLab API Token
 

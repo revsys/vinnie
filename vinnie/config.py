@@ -15,9 +15,6 @@ ALLOWED_OPTIONS = [
     "prefix",
     "omit_prefix",
     "semver",
-    "s3_access_key",
-    "s3_secret_key",
-    "s3_url",
     "current_version",
     "remote",
     "marker",
@@ -59,9 +56,6 @@ class VinnieConfig:
 
         # Validate keys and tokens
         self.validate_keys_and_tokens()
-
-        # Validate s3 options
-        self.validate_s3()
 
         return True
 
@@ -122,12 +116,6 @@ class VinnieConfig:
 
         except ValueError:
             raise VinnieConfigError(f"'{self.repo_url}' is not a valid URL")
-
-    def validate_s3(self):
-        # We either need no s3 options or all of them
-        s3_options = (self.s3_access_key, self.s3_secret_key, self.s3_url)
-        if any(s3_options) and not all(s3_options):
-            raise VinnieConfigError("Some, but not all S3 options set")
 
     def dump(self):
         for k, v in self.__dict__.items():
