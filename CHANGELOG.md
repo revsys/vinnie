@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.2
+
+- Fix issue with incorrectly parsing incrementing integers as strings
+- Updated test library versions
+- Removed unimplemented `validation` command and options as it confused people
 
 ## 0.6.0
 
