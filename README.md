@@ -35,11 +35,11 @@ mostly for debugging.
 
 Vinnie also supports not using [semver](https://semver.org/) by just using an
 incrementing integer (v1, v2, ... v47) if you wish.  To do that you need to
-always pass in the option `--semver=False` and then the only incrementing
+always pass in the option `--no-semver` and then the only incrementing
 command to use is bump.
 
 ```shell
-$ vinnie --semver=False bump
+$ vinnie --no-semver bump
 ```
 
 ## Options
