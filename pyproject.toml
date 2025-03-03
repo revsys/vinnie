@@ -19,7 +19,7 @@ requires-python = ">=3.9"
 dependencies = [
     "Click>=7.1,<9.0",
     "semver>=2.13.0",
-    "GitPython>=3.1.13",
+    "GitPython>=3.1.37",
 ]
 
 [project.optional-dependencies]
