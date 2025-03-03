@@ -10,7 +10,6 @@ from .base import Vinnie
 @click.option("--push/--no-push", envvar="VINNIE_PUSH", default=True)
 @click.option("--repo", envvar="VINNIE_REPO_PATH", default=".")
 @click.option("--repo-url", envvar="VINNIE_REPO_URL", default=None)
-@click.option("--ssh-key", envvar="VINNIE_SSH_KEY", default=None)
 @click.option("--github-token", envvar="VINNIE_GITHUB_TOKEN", default=None)
 @click.option("--gitlab-token", envvar="VINNIE_GITLAB_TOKEN", default=None)
 @click.option("--prefix", envvar="VINNIE_TAG_PREFIX", default="")
