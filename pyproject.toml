@@ -1,8 +1,17 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "vinnie"
 version = "0.9.0"
-
-classifiers=[
+description = "A small utility to handle semantic versioning using only git tags"
+readme = "README.md"
+authors = [
+    {name = "Frank Wiles", email = "frank@revsys.com"}
+]
+license = {text = "BSD License"}
+classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "License :: OSI Approved :: BSD License",
@@ -10,3 +19,31 @@ classifiers=[
     "Topic :: Software Development",
     "Topic :: System :: Systems Administration",
 ]
+requires-python = ">=3.6"
+dependencies = [
+    "Click>=7.1,<9.0",
+    "semver>=2.13.0",
+    "GitPython>=3.1.13",
+]
+urls = {Homepage = "https://github.com/revsys/vinnie/"}
+
+[project.scripts]
+vinnie = "vinnie.cli:cli"
+
+[tool.setuptools]
+packages = {find = {exclude = ["tests", "tests.*"]}}
+include-package-data = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+
+[tool.bumpversion]
+current_version = "0.9.0"
+commit = true
+tag = true
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = "version = \"{current_version}\""
+replace = "version = \"{new_version}\""
