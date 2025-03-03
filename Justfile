@@ -34,4 +34,4 @@ dist: clean
 
 # Package and upload a release
 release: dist
-    twine upload dist/*
+    python -m twine upload dist/*
