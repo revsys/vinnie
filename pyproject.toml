@@ -36,7 +36,9 @@ include-package-data = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-python_files = "test_*.py"
+python_files = "test*.py"
+addopts = "--cov"
+norecursedirs = ".git .eggs build dist docs *.egg-info"
 
 [tool.bumpversion]
 current_version = "0.9.0"
