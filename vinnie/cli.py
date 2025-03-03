@@ -21,7 +21,7 @@ from .base import Vinnie
 @click.option("--marker", envvar="VINNIE_VERSION_MARKER", default="__VINNIE_VERSION__")
 @click.pass_context
 def cli(ctx, **kwargs):
-    """ Vinnie the Versioner """
+    """Vinnie the Versioner"""
     ctx.obj = Vinnie(**kwargs)
 
     if ctx.invoked_subcommand is None:
@@ -33,7 +33,7 @@ def cli(ctx, **kwargs):
 @click.pass_obj
 @click.pass_context
 def bump(ctx, v):
-    """ Bump incrementing integer version """
+    """Bump incrementing integer version"""
     try:
         new_value = v.next_bump()
         new_value = v.omit_prefix(new_value)
@@ -47,7 +47,7 @@ def bump(ctx, v):
 @click.pass_obj
 @click.pass_context
 def patch(ctx, v):
-    """ Patch version number, tag and push"""
+    """Patch version number, tag and push"""
     try:
         new_value = v.next_patch()
         new_value = v.omit_prefix(new_value)
@@ -61,7 +61,7 @@ def patch(ctx, v):
 @click.pass_obj
 @click.pass_context
 def minor(ctx, v):
-    """ Increase minor version, tag and push """
+    """Increase minor version, tag and push"""
     try:
         new_value = v.next_minor()
         new_value = v.omit_prefix(new_value)
@@ -75,7 +75,7 @@ def minor(ctx, v):
 @click.pass_obj
 @click.pass_context
 def major(ctx, v):
-    """ Increase major version, tag and push """
+    """Increase major version, tag and push"""
     try:
         new_value = v.next_major()
         new_value = v.omit_prefix(new_value)
@@ -90,7 +90,7 @@ def major(ctx, v):
 @click.pass_obj
 @click.pass_context
 def next(ctx, v, part):
-    """ Return next version updating the given part (patch, minor, or major)"""
+    """Return next version updating the given part (patch, minor, or major)"""
     try:
         if part == "patch":
             next_value = v.get_next_patch()
@@ -114,7 +114,7 @@ def next(ctx, v, part):
 @cli.command()
 @click.pass_obj
 def version(v):
-    """ Print current version to stdout """
+    """Print current version to stdout"""
     version = v.version()
     version = v.omit_prefix(version)
     click.echo(version)
@@ -127,7 +127,7 @@ def version(v):
 )
 @click.pass_obj
 def replace(v, filename):
-    """ Replace placeholder with current version """
+    """Replace placeholder with current version"""
     version = v.version()
     version = v.omit_prefix(version)
 
@@ -148,5 +148,5 @@ def replace(v, filename):
 @cli.command()
 @click.pass_obj
 def show_config(v):
-    """ Show the current configuration """
+    """Show the current configuration"""
     v.dump()

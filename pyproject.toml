@@ -42,6 +42,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build]
 exclude = [
+  "/venv",
   "/tests",
 ]
 

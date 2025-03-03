@@ -48,8 +48,6 @@ $ vinnie --no-semver bump
 
 `--repo-url` set the URL on a supported provider for the repository
 
-`--ssh-key` path to the ssh key to use on disk
-
 `--github-token` GitHub API token
 
 `--gitlab-token` GitLab API token
@@ -77,7 +75,6 @@ the following map to the given option
 
 - `VINNIE_REPO_PATH` sets `--repo`
 - `VINNIE_REPO_URL` sets `--repo-url`
-- `VINNIE_SSH_KEY` sets `--ssh-key`
 - `VINNIE_GITHUB_TOKEN` sets `--github-token`
 - `VINNIE_GITLAB_TOKEN` sets `--gitlab-token`
 - `VINNIE_REPO_PUSH` sets `--push`
@@ -122,8 +119,7 @@ Vinnie is very similar to these other fine projects:
 
 ## Roadmap / TODO
 
-- [ ] Support versioning without SSH or the repo with GitHub API Token
-- [ ] Support versioning without SSH or the repo with GitLab API Token
+We feel this is pretty feature complete, but definitely open to suggestions! 
 
 ## License
 
@@ -142,4 +138,3 @@ If you have a question about this project, please open a GitHub issue. If you lo
 <a href="https://twitter.com/revsys"><img src="https://cdn1.iconfinder.com/data/icons/new_twitter_icon/256/bird_twitter_new_simple.png" height="43" /></a>
 <a href="https://www.facebook.com/revsysllc/"><img src="https://cdn3.iconfinder.com/data/icons/picons-social/57/06-facebook-512.png" height="50" /></a>
 <a href="https://github.com/revsys/"><img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height="53" /></a>
-<a href="https://gitlab.com/revsys"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/GitLab_Logo.svg/2000px-GitLab_Logo.svg.png" height="44" /></a>
