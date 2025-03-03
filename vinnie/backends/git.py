@@ -6,7 +6,7 @@ from .base import BaseBackend
 
 
 class VinnieGit(BaseBackend):
-    """ Local git backend for Vinnie """
+    """Local git backend for Vinnie"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -21,7 +21,7 @@ class Vinnie:
         self.setup_backend()
 
     def setup_backend(self):
-        """ Based on our configuration, grab the appropriate backend """
+        """Based on our configuration, grab the appropriate backend"""
         # We're already setup
         if self.backend is not None:
             return
@@ -61,7 +61,7 @@ class Vinnie:
         return value
 
     def version(self):
-        """ Return the current version """
+        """Return the current version"""
         if self.config.current_version is not None:
             return self.config.current_version
         else:

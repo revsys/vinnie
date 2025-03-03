@@ -49,7 +49,7 @@ class VinnieConfig:
             self.remote = "origin"
 
     def validate(self):
-        """ Validate that the provided options make sense """
+        """Validate that the provided options make sense"""
 
         # Validate our repo setup is correct
         self.validate_repo()
@@ -60,7 +60,7 @@ class VinnieConfig:
         return True
 
     def validate_repo(self):
-        """ Ensure we given a repo path or URL """
+        """Ensure we given a repo path or URL"""
         # We can only have a repo path or a repo URL, but not both
         if self.repo_url is not None and self.repo is not None:
             raise VinnieConfigError(
@@ -74,7 +74,7 @@ class VinnieConfig:
             self.validate_repo_url()
 
     def validate_repo_path(self):
-        """ Ensure our repo path exists, is readable, and looks to be a git repo """
+        """Ensure our repo path exists, is readable, and looks to be a git repo"""
         p = Path(self.repo)
 
         if not p.exists():
@@ -99,12 +99,12 @@ class VinnieConfig:
             )
 
     def validate_keys_and_tokens(self):
-        """ Ensure we have an SSH key or a token, but not more than we need """
+        """Ensure we have an SSH key or a token, but not more than we need"""
         if any((self.ssh_key, self.github_token, self.gitlab_token)):
             warnings.warn("SSH and API token features not yet implemented")
 
     def validate_repo_url(self):
-        """ Ensure repo URL looks valid """
+        """Ensure repo URL looks valid"""
         try:
             parts = urlparse(self.repo_url)
 
@@ -120,4 +120,3 @@ class VinnieConfig:
     def dump(self):
         for k, v in self.__dict__.items():
             print(f"{k}={v}")
-

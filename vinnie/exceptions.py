@@ -1,4 +1,4 @@
 class VinnieConfigError(Exception):
-    """ To denote a problem with Vinnie's configuration """
+    """To denote a problem with Vinnie's configuration"""
 
     pass
