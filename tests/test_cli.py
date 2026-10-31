@@ -1,6 +1,21 @@
+import subprocess
+import sys
+
 from click.testing import CliRunner
 
 from vinnie.cli import cli
+
+
+def test_python_m_vinnie():
+    result = subprocess.run(
+        [sys.executable, "-m", "vinnie"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0
+    assert "Usage: vinnie" in result.stdout
+    assert "Vinnie the Versioner" in result.stdout
 
 
 def test_help_runs():
